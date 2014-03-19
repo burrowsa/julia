@@ -554,19 +554,29 @@ Iterable Collections
 
 .. function:: maximum(itr)
 
-   Returns the largest element in a collection
+   Returns the largest element in a collection.
 
 .. function:: maximum(A, dims)
 
-   Compute the maximum value of an array over the given dimensions
+   Compute the maximum value of an array over the given dimensions.
+
+.. function:: maximum!(r, A)
+
+   Compute the maximum value of ``A`` over the singleton dimensions of ``r``, 
+   and write results to ``r``.
 
 .. function:: minimum(itr)
 
-   Returns the smallest element in a collection
+   Returns the smallest element in a collection.
 
 .. function:: minimum(A, dims)
 
-   Compute the minimum value of an array over the given dimensions
+   Compute the minimum value of an array over the given dimensions.
+
+.. function:: minimum!(r, A)
+
+   Compute the minimum value of ``A`` over the singleton dimensions of ``r``, 
+   and write results to ``r``.
 
 .. function:: extrema(itr)
 
@@ -575,27 +585,32 @@ Iterable Collections
 
 .. function:: indmax(itr) -> Integer
 
-   Returns the index of the maximum element in a collection
+   Returns the index of the maximum element in a collection.
 
 .. function:: indmin(itr) -> Integer
 
-   Returns the index of the minimum element in a collection
+   Returns the index of the minimum element in a collection.
 
 .. function:: findmax(itr) -> (x, index)
 
-   Returns the maximum element and its index
+   Returns the maximum element and its index.
 
 .. function:: findmin(itr) -> (x, index)
 
-   Returns the minimum element and its index
+   Returns the minimum element and its index.
 
 .. function:: sum(itr)
 
-   Returns the sum of all elements in a collection
+   Returns the sum of all elements in a collection.
 
 .. function:: sum(A, dims)
 
    Sum elements of an array over the given dimensions.
+
+.. function:: sum!(r, A)
+
+   Sum elements of ``A`` over the singleton dimensions of ``r``, 
+   and write results to ``r``. 
 
 .. function:: sum(f, itr)
 
@@ -603,27 +618,42 @@ Iterable Collections
 
 .. function:: prod(itr)
 
-   Returns the product of all elements of a collection
+   Returns the product of all elements of a collection.
 
 .. function:: prod(A, dims)
 
    Multiply elements of an array over the given dimensions.
 
+.. function:: prod!(r, A)
+
+   Multiply elements of ``A`` over the singleton dimensions of ``r``, 
+   and write results to ``r``.
+
 .. function:: any(itr) -> Bool
 
-   Test whether any elements of a boolean collection are true
+   Test whether any elements of a boolean collection are true.
 
 .. function:: any(A, dims)
 
    Test whether any values along the given dimensions of an array are true.
 
+.. function:: any!(r, A)
+
+   Test whether any values in ``A`` along the singleton dimensions of ``r`` are true, 
+   and write results to ``r``. 
+
 .. function:: all(itr) -> Bool
 
-   Test whether all elements of a boolean collection are true
+   Test whether all elements of a boolean collection are true.
 
 .. function:: all(A, dims)
 
    Test whether all values along the given dimensions of an array are true.
+
+.. function:: all!(r, A)
+
+   Test whether all values in ``A`` along the singleton dimensions of ``r`` are true, 
+   and write results to ``r``.
 
 .. function:: count(p, itr) -> Integer
 
@@ -1355,6 +1385,10 @@ I/O
 .. function:: read(stream, type, dims)
 
    Read a series of values of the given type from a stream, in canonical binary representation. ``dims`` is either a tuple or a series of integer arguments specifying the size of ``Array`` to return.
+
+.. function:: read!(stream, array::Array)
+
+   Read binary data from a stream, filling in the argument ``array``.
 
 .. function:: readbytes!(stream, b::Vector{Uint8}, nb=length(b))
 
@@ -3452,11 +3486,11 @@ Random number generation in Julia uses the `Mersenne Twister library <http://www
 
    Fill an array with random boolean values. A may be an ``Array`` or a ``BitArray``.
 
-.. function:: randn(dims or [dims...])
+.. function:: randn([rng], dims or [dims...])
 
    Generate a normally-distributed random number with mean 0 and standard deviation 1. Optionally generate an array of normally-distributed random numbers.
 
-.. function:: randn!(A::Array{Float64,N})
+.. function:: randn!([rng], A::Array{Float64,N})
 
    Fill the array A with normally-distributed (mean 0, standard deviation 1) random numbers. Also see the rand function.
 
@@ -3981,6 +4015,10 @@ Statistics
    Note: Julia does not ignore ``NaN`` values in the computation.
    For applications requiring the handling of missing data, the ``DataArray``
    package is recommended.
+
+.. function:: mean!(r, v)
+
+   Compute the mean of ``v`` over the singleton dimensions of ``r``, and write results to ``r``.
 
 .. function:: std(v[, region])
 
